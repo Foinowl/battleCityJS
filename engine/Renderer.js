@@ -9,8 +9,6 @@
       
       this.canvas.width = args.width || 100
       this.canvas.height = args.height || 100
-
-      this.update = args.update || (() => {})
     }
 
     get displayObjects() {

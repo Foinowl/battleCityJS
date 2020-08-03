@@ -6,6 +6,7 @@
       super()
 
       this.autoStart = args.autoStart || false
+      this.name = name || ''
       this.status = 'waiting'
       this.stage = this.displayObjects
       this.game = null
@@ -21,6 +22,10 @@
       if (args.update) {
         this.update = args.update.bind(this)
       }
+
+      if (args.beforeDestroy) {
+        this.beforeDestroy = args.beforeDestroy.bind(this)
+      }
     }
 
     loading() {
@@ -32,6 +37,10 @@
     }
 
     update() {}
+
+    beforeDestroy() {
+      Object.keys(this).forEach(key => delete this[key])
+    }
   }
 
   window.GameEngine = window.GameEngine || {}

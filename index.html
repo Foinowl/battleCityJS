@@ -13,74 +13,11 @@
   <script src="engine/Renderer.js"></script>
   <script src="engine/Sprite.js"></script>
   <script src="engine/Scene.js"></script>
+  <script src="engine/Mouse.js"></script>
+  <script src="engine/Keyboard.js"></script>
+  <script src="engine/Point.js"></script>
+  <script src="engine/Body.js"></script>
   <script src="engine/Game.js"></script>
-  <script>
-    const {Loader, Renderer, Sprite, Container, Game, Scene} = GameEngine
-
-    // let sprite = null
-
-    // const loader = new Loader
-    // const renderer = new Renderer({
-    //   width: 500,
-    //   height: 500,
-    //   background: 'gray',
-
-    //   update(timestamp) {
-    //     if (!sprite) {
-    //       return
-    //     }
-
-    //       sprite.rotation = timestamp / 1000
-    //     // sprite.x = renderer.canvas.width / 2 + 100 * Math.cos(timestamp / 100)
-    //     // sprite.y = renderer.canvas.height / 2 + 100 * Math.sin(timestamp / 100)
-    //   }
-    // })
-
-    // document.body.append(renderer.canvas)
-
-    // loader.addImage('1', 'static/1.jpg')
-    // loader.load(() => {
-    //   sprite = new Sprite(loader.getImage('1'), {
-    //     x: renderer.canvas.width / 2,
-    //     y: renderer.canvas.height / 2,
-    //     rotation: Math.PI / 2 ,
-    //     scale: 0.25,
-    //     anchorX: 0.5,
-    //     anchorY: 0.5
-    //   })
-
-    //   const container = new Container()
-    //   // container.x = 100
-    //   // container.y = 100
-    //   // container.rotation = Math.PI / 4
-
-    //   renderer.stage.add(container)
-    //   container.add(sprite)
-
-    //   // sprite.absoluteX = 0
-    //   // sprite.absoluteY = 0
-    //   // sprite.x = 200
-    //   // sprite.y = 200
-    //   // sprite.width = 100
-    //   // sprite.height = 100
-    // })
-
-    const mainScene = new Scene({
-      autoStart: true,
-      loading(loader) {
-        console.log('loading fire');
-      },
-      init() {console.log('init fire');},
-      update() {console.log('update fire');}
-    })
-
-    const game = new Game({
-      el: document.body,
-      width: 500,
-      height: 500,
-      background: 'green',
-      scenes: [mainScene]
-    })
-  </script> 
+  <script src="game/index.js"></script>
 </body> 
 </html>

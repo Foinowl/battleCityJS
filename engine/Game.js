@@ -6,9 +6,10 @@
       this.renderer = new GameEngine.Renderer(args)
       this.loader = new GameEngine.Loader()
       this.scenesCollection = new GameEngine.Container()
+      this.keyboard = new GameEngine.Keyboard()
 
       if (args.scenes) {
-        this.add(...args.scenes)
+        this.addScene(...args.scenes)
       }
 
       if (args.el && args.el.appendChild) {
@@ -40,7 +41,7 @@
       return this.scenesCollection.displayObjects
     }
 
-    add(...scenes) {
+    addScene(...scenes) {
       this.scenesCollection.add(...scenes)
       for (const scene of scenes) {
         scene.parent = this
@@ -48,14 +49,70 @@
     }
 
     tick(timestamp) {
-      // this.update(timestamp)
-      // this.renderer.clear()
-      // this.renderer.render()
+      const startedScenes = this.scenes.filter(x => x.status === 'started')
 
-      this.scenes
-        .filter(scene => scene.status === 'started')
-        .forEach(scene => scene.update(timestamp))
+
+      for (const scene of startedScenes) {
+        scene.update(timestamp)
+      }
+
+        this.renderer.clear()
+
+        for (const scene of startedScenes) {
+          scene.draw(this.renderer.canvas, this.renderer.context)
+        }
+
       requestAnimationFrame(timestamp => this.tick(timestamp))
+    }
+
+    getScene(name) {
+      if (name instanceof GameEngine.Scene) {
+        if (this.scenes.includes(name)) {
+          return name
+        }
+      } 
+      if (typeof name === 'string') {
+        for (const sceneItem of this.scenes) {
+          if (sceneItem.name === name) {
+            return scene
+          }
+        }
+      } 
+      if (scene === null) {
+        return false
+      }
+    }
+
+    startScene(name) {
+      const scene = this.getScene(name)
+
+      if (!scene) {
+        return false
+      }
+
+      scene.status = 'loading'
+      scene.loading(this.loader)
+
+    this.loader.load(() => {
+      scene.status = 'init'
+      scene.init(this.loader)
+
+      scene.status = 'started'
+    })
+
+    return true
+    }
+
+    finishScene(name) {
+      const scene = this.getScene(name)
+
+      if (!scene) {
+        return false
+      }
+
+      scene.status = 'finished'
+      this.scenesCollection.remove(scene)
+      scene.beforeDesctroy()
     }
   }
 
