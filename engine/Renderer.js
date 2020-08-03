@@ -11,18 +11,6 @@
       this.canvas.height = args.height || 100
 
       this.update = args.update || (() => {})
-
-      this.stage = new GameEngine.Container()
-
-      requestAnimationFrame(timestamp => this.tick(timestamp))
-    }
-
-    tick(timestamp) {
-      this.update(timestamp)
-      this.clear()
-      this.render()
-
-      requestAnimationFrame(timestamp => this.tick(timestamp))
     }
 
     get displayObjects() {
@@ -38,9 +26,9 @@
       }
     }
 
-    render() {
-      this.stage.draw(this.canvas, this.context)
-    }
+    // render() {
+    //   this.stage.draw(this.canvas, this.context)
+    // }
 
     clear() {
       this.context.fillStyle = this.background

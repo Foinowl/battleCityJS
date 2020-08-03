@@ -1,23 +1,45 @@
 (function() {
   'use strict'
 
-  class Container {
-    constructor() {
+  class Container extends GameEngine.DisplayObject{
+    constructor(args = {}) {
+      super(args)
       this.displayObjects = []
+
+      delete this.width
+      delete this.height
     }
 
-    add(displayObject) {
-      if (!this.displayObjects.includes(displayObject)) {
-        this.displayObjects.push(displayObject)
+    add(...displayObjects) {
+      for (const displayObject of displayObjects) {
+        if (!this.displayObjects.includes(displayObject)) {
+          this.displayObjects.push(displayObject)
+          displayObject.setParent(this)
+        }
       }
     }
 
-    remove() {
-
+    remove(...displayObjects) {
+      for (const displayObject of displayObjects) {
+        if (this.displayObjects.includes(displayObject)) {
+          const index = this.displayObjects.indexOf(displayObject)
+          this.displayObjects.splice(index, 1)
+          displayObject.setParent(null)
+        }
+      }
     }
 
     draw(canvas, context) {
-      this.displayObjects.forEach(obj => obj.draw(canvas, context))
+      super.draw(() => {
+        context.save()
+        context.translate(this.x, this.y)
+        context.rotate(this.rotation)
+        context.scale(this.scaleX, this.scaleY)
+  
+        this.displayObjects.forEach(obj => obj.draw(canvas, context))
+  
+        context.restore()
+      })
     }
   }
 
