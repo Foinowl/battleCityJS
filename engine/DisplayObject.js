@@ -1,8 +1,13 @@
 ;(function() {
   'use strict'
 
-  class DisplayObject{
+  class DisplayObject extends GameEngine.EventEmitter {
     constructor(args = {}) {
+      super()
+
+
+      this.uid = GameEngine.Utils.generateUid()
+
       this.x = args.x || 0
       this.y = args.y || 0
 
@@ -26,20 +31,20 @@
     }
 
     get absoluteX() {
-      return this.x - this.anchorX * this.width 
+      return this.x - this.anchorX * this.width * this.scaleX
     }
 
     set absoluteX(val) {
-      this.x = val + this.anchorX * this.width
+      this.x = val + this.anchorX * this.width * this.scaleX
      return val
     }
 
     get absoluteY() {
-      return this.y - this.anchorY * this.height 
+      return this.y - this.anchorY * this.height * this.scaleY
     }
 
     set absoluteY(val) {
-      this.y = val + this.anchorY * this.height
+      this.y = val + this.anchorY * this.height * this.scaleY
       return val
     }
 

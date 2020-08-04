@@ -1,4 +1,4 @@
-const {Body, Sprite, Container, Game, Scene, Point} = GameEngine
+const {Body, Sprite, Container, Game, Scene, EventEmitter, Utils, ArcadePhysics} = GameEngine
 
 const mainScene = new Scene({
   name: 'mainScene',
@@ -9,7 +9,10 @@ const mainScene = new Scene({
   init(loader) {
     const texture = this.parent.loader.getImage('bunny')
 
-    this.bunny = new Body(texture, {
+
+    this.arcadePhysics = new ArcadePhysics 
+
+    this.bunny1 = new Body(texture, {
       scale: 0.25,
       anchorX: 0.5,
       anchorY: 0.5,
@@ -18,21 +21,33 @@ const mainScene = new Scene({
       debug: true
     })
 
-    this.add(this.bunny)
-  },
+    this.bunny2 = new Body(texture, {
+      scale: 0.25,
+      anchorX: 0.5,
+      anchorY: 0.5,
+      x: this.parent.renderer.canvas.width / 4,
+      y: this.parent.renderer.canvas.height / 4,
+      debug: true
+    })
 
-  // beforeDestroy() {
-  //   delete this.bunny
-  // },
+    this.add(this.bunny1, this.bunny2)
+    this.arcadePhysics.add(this.bunny1, this.bunny2)
+  },
 
   update(timestamp) {
     const {keyboard} = this.parent
 
-    this.bunny.rotation = timestamp / 1000
+    this.bunny1.velocity.x = 0
+    this.bunny1.velocity.y = 0
 
-    if (keyboard.arrowUp) {
-      this.bunny.y -= 1
+    if (keyboard.ArrowUp) {
+      this.bunny1.velocity.y = -5
     }
+    if (keyboard.ArrowDown) {
+      this.bunny1.velocity.y = +5
+    }
+
+    this.arcadePhysics.processing()
   }
 })
 

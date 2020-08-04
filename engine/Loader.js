@@ -47,20 +47,20 @@
         promises.push(promise)
         }
 
-        // for (const jsonData of this.loadOrder.images) {
-        //   const {name, address} = jsonData
-        //   const promise = Loader
-        //     .loadJson(address)
-        //     .then(json => {
-        //       this.resources.jsons[name] = json
-  
-        //       if (this.loadOrder.jsons.includes(jsonData)) {
-        //         const index = this.loadOrder.jsons.indexOf(jsonData)
-        //         this.loadOrder.jsons.splice(index, 1)
-        //       }
-        //     })
-        //   promises.push(promise)
-        //  }
+      for (const jsonData of this.loadOrder.json) {
+        const {name, address} = jsonData
+        const promise = Loader
+          .loadJson(address)
+          .then(json => {
+            this.resources.jsons[name] = json
+
+            if (this.loadOrder.jsons.includes(jsonData)) {
+              const index = this.loadOrder.jsons.indexOf(jsonData)
+              this.loadOrder.jsons.splice(index, 1)
+            }
+          })
+        promises.push(promise)
+        }
       Promise.all(promises).then(cb)
   }
 

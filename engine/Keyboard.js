@@ -3,28 +3,28 @@
 
   class Keyboard {
     constructor() {
-      this.arrowUp = false
-      this.arrowDown = false
-      this.arrowLeft = false
-      this.arrowRight = false
-      this.space = false
+      this.ArrowUp = false
+      this.ArrowDown = false
+      this.ArrowLeft = false
+      this.ArrowRight = false
+      this.Space = false
 
       document.body.addEventListener('keydown', (event) => {
         switch(event.code) {
           case 'ArrowUp':
-            this.arrowUp = true
+            this.ArrowUp = true
             break
-          case 'arrowDown':
-            this.arrowDown = true
+          case 'ArrowDown':
+            this.ArrowDown = true
             break
-          case 'arrowLeft':
-            this.arrowLeft = true
+          case 'ArrowLeft':
+            this.ArrowLeft = true
             break
-          case 'arrowRight':
-            this.arrowRight = true
+          case 'ArrowRight':
+            this.ArrowRight = true
             break
           case 'Space':
-            this.space = true
+            this.Space = true
             break
         }
       })
@@ -32,19 +32,19 @@
       document.body.addEventListener('keyup', (event) => {
         switch(event.code) {
           case 'ArrowUp':
-            this.arrowUp = false
+            this.ArrowUp = false
             break
-          case 'arrowDown':
-            this.arrowDown = false
+          case 'ArrowDown':
+            this.ArrowDown = false
             break
-          case 'arrowLeft':
-            this.arrowLeft = false
+          case 'ArrowLeft':
+            this.ArrowLeft = false
             break
-          case 'arrowRight':
-            this.arrowRight = false
+          case 'ArrowRight':
+            this.ArrowRight = false
             break
           case 'Space':
-            this.space = false
+            this.Space = false
             break
         }
       })
