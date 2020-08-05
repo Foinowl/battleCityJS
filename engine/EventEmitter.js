@@ -1,37 +1,33 @@
-(function() {
-  'user strict'
-
-  class EventEmitter {
-    constructor() {
-      this.handlers = {}
+export default class EventEmitter {
+    constructor () {
+        this.handlers = {}
     }
 
     on (...args) {
-      this.addEventListener(...args)
-  }
-
-    off(...args) {}
-
-    addEventListener(name, handler) {
-      if(!this.handlers.hasOwnProperty(name)) {
-        this.handlers[name] = []
-      }
-      this.handlers[name].push(handler)
+        this.addEventListener(...args)
     }
 
-    removeEventListener(name = null, handler = null) {}
-
-    emit(name, args = {}) {
-      if(!this.handlers.hasOwnProperty(name)) {
-        return
-      }
-
-      for (const handler of this.handlers[name]) {
-        handler(...args)
-      }
+    off (...args) {
+        this.removeEventListener(...args)
     }
-  }
 
-  window.GameEngine = window.GameEngine || {}
-  window.GameEngine.EventEmitter = EventEmitter
-})()
+    addEventListener (name, handler) {
+        if (!this.handlers.hasOwnProperty(name)) {
+            this.handlers[name] = []
+        }
+
+        this.handlers[name].push(handler)
+    }
+
+    removeEventListener (name = null, handler = null) {}
+
+    emit (name, ...args) {
+        if (!this.handlers.hasOwnProperty(name)) {
+            return
+        }
+
+        for (const handler of this.handlers[name]) {
+            handler(...args)
+        }
+    }
+}

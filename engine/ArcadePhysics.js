@@ -1,25 +1,24 @@
-(function() {
-  'user strict'
+import Util from './Util'
 
-  class ArcadePhysics {
-    constructor() {
-      this.objects = new Set
+export default class ArcadePhysics {
+    constructor () {
+        this.objects = new Set
     }
 
-    add(...objects) {
-      for (const object of objects) {
-        this.objects.add(object)
-      }
+    add (...objects) {
+        for (const object of objects) {
+            this.objects.add(object)
+        }
     }
 
-    remove(...objects) {
-      for (const object of objects) {
-        this.objects.delete(object)
-      }
+    remove (...objects) {
+        for (const object of objects) {
+            this.objects.delete(object)
+        }
     }
 
-    processing() {
-      const objects = Array.from(this.objects)
+    processing () {
+        const objects = Array.from(this.objects)
 
         for (let i = 0; i < objects.length - 1; i++) {
             const a = objects[i]
@@ -43,7 +42,7 @@
                 let crossing = false
 
                 for (const topA of topsA) {
-                    crossing = Utils.isInside(
+                    crossing = Util.isInside(
                         {
                             x: topA[0] + vxA,
                             y: topA[1] + vyA
@@ -63,7 +62,7 @@
 
                 if (crossing === false) {
                     for (const topB of topsB) {
-                        crossing = Utils.isInside(
+                        crossing = Util.isInside(
                             {
                                 x: topB[0] + vxB,
                                 y: topB[1] + vyB
@@ -89,8 +88,4 @@
             }
         }
     }
-  }
-
-  window.GameEngine = window.GameEngine || {}
-  window.GameEngine.ArcadePhysics = ArcadePhysics
-})()
+}

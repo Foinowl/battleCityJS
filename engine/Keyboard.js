@@ -1,56 +1,59 @@
-(function() {
-  'user strict'
+export default class Keyboard {
+    constructor () {
+        const keyboard = this
 
-  class Keyboard {
-    constructor() {
-      this.ArrowUp = false
-      this.ArrowDown = false
-      this.ArrowLeft = false
-      this.ArrowRight = false
-      this.Space = false
+        this.arrowUp = false
+        this.arrowDown = false
+        this.arrowLeft = false
+        this.arrowRight = false
+        this.space = false
 
-      document.body.addEventListener('keydown', (event) => {
-        switch(event.code) {
-          case 'ArrowUp':
-            this.ArrowUp = true
-            break
-          case 'ArrowDown':
-            this.ArrowDown = true
-            break
-          case 'ArrowLeft':
-            this.ArrowLeft = true
-            break
-          case 'ArrowRight':
-            this.ArrowRight = true
-            break
-          case 'Space':
-            this.Space = true
-            break
-        }
-      })
+        document.body.addEventListener('keydown', function (event) {
+            switch (event.code) {
+                case "ArrowUp":
+                    keyboard.arrowUp = true
+                    break
+                
+                case "ArrowDown":
+                    keyboard.arrowDown = true
+                    break
+                
+                case "ArrowRight":
+                    keyboard.arrowRight = true
+                    break
+                
+                case "ArrowLeft":
+                    keyboard.arrowLeft = true
+                    break
 
-      document.body.addEventListener('keyup', (event) => {
-        switch(event.code) {
-          case 'ArrowUp':
-            this.ArrowUp = false
-            break
-          case 'ArrowDown':
-            this.ArrowDown = false
-            break
-          case 'ArrowLeft':
-            this.ArrowLeft = false
-            break
-          case 'ArrowRight':
-            this.ArrowRight = false
-            break
-          case 'Space':
-            this.Space = false
-            break
-        }
-      })
+                case "Space":
+                    keyboard.space = true
+                    break
+            }
+        })
+
+        document.body.addEventListener('keyup', function (event) {
+            switch (event.code) {
+                case "ArrowUp":
+                    keyboard.arrowUp = false
+                    break
+                
+                case "ArrowDown":
+                    keyboard.arrowDown = false
+                    break
+                
+                case "ArrowRight":
+                    keyboard.arrowRight = false
+                    break
+                
+                case "ArrowLeft":
+                    keyboard.arrowLeft = false
+                    break
+
+                case "Space":
+                    keyboard.space = false
+                    break
+            }
+        })
     }
-  }
-
-  window.GameEngine = window.GameEngine || {}
-  window.GameEngine.Keyboard = Keyboard
-})()
+}

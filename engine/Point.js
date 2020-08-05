@@ -1,22 +1,18 @@
-(function() {
-  'user strict'
+import DisplayObject from './DisplayObject'
 
-  class Point extends GameEngine.DisplayObject{
-    constructor(args) {
-      super(args)
+export default class Point extends DisplayObject {
+    constructor (args = {}) {
+        super(args)
 
-      this.color = args.color || 'red'
+        this.color = args.color || 'red'
     }
-    draw(canvas, context) {
-      super.draw(() => {
-        context.fillStyle = this.color
-        context.beginPath()
-        context.arc(this.x, this.y, 5, 0, Math.PI * 2)
-        context.fill()
-      })
-    }
-  }
 
-  window.GameEngine = window.GameEngine || {}
-  window.GameEngine.Point = Point
-})()
+    draw (canvas, context) {
+        super.draw(() => {
+            context.fillStyle = this.color
+            context.beginPath()
+            context.arc(this.x, this.y, 3, 0, Math.PI * 2)
+            context.fill()
+        })
+    }
+}
